@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://rechinobooks-beep.github.io/utilihub/sitemap.xml
+
+Sitemap: https://rechinobooks-beep.github.io/tivorly/sitemap.xml
