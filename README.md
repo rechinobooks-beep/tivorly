@@ -1,8 +1,8 @@
-# UtiliHub
+# Tivorly
 
-Pequenas ferramentas. Grandes facilidades.
+Smart tools. Simple solutions.
 
-UtiliHub is a responsive collection of free browser-based utilities. The first release includes a word counter, percentage calculator, unit converter, JSON formatter, text case converter and a local password-strength checklist.
+Tivorly is a responsive collection of free browser-based utilities. The first release includes a word counter, percentage calculator, unit converter, JSON formatter, text case converter and a local password-strength checklist.
 
 ## Run locally
 
