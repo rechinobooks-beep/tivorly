@@ -10,13 +10,14 @@ export default function AuthModal({pt,session,onClose,onSignOut,notice,setNotice
  const [busy,setBusy]=useState(false)
  const [message,setMessage]=useState('')
  const [error,setError]=useState('')
+ const APP_URL='https://rechinobooks-beep.github.io/tivorly/'
  const label=pt?{login:'Entrar na tua conta',signup:'Criar conta Tivorly',forgot:'Recuperar palavra-passe',update:'Definir nova palavra-passe'}:{login:'Sign in to your account',signup:'Create a Tivorly account',forgot:'Reset your password',update:'Set a new password'}
  const clear=()=>{setMessage('');setError('');setNotice?.('')}
  const run=async(e)=>{e.preventDefault();clear();if(!isSupabaseConfigured){setError(pt?'A ligação ao Supabase ainda não está configurada no GitHub.':'Supabase connection is not configured in GitHub yet.');return}setBusy(true)
  try{
-  if(mode==='signup'){const {error}=await supabase.auth.signUp({email,password,options:{data:{display_name:name.trim()}}});if(error)throw error;setMessage(pt?'Conta criada. Verifica o teu e-mail para confirmar o registo.':'Account created. Check your email to confirm your registration.')}
+  if(mode==='signup'){const {error}=await supabase.auth.signUp({email,password,options:{data:{display_name:name.trim()},emailRedirectTo:APP_URL}});if(error)throw error;setMessage(pt?'Conta criada. Verifica o teu e-mail para confirmar o registo.':'Account created. Check your email to confirm your registration.')}
   else if(mode==='login'){const {error}=await supabase.auth.signInWithPassword({email,password});if(error)throw error;onClose()}
-  else if(mode==='forgot'){const {error}=await supabase.auth.resetPasswordForEmail(email,{redirectTo:window.location.origin+'/tivorly/'});if(error)throw error;setMessage(pt?'Se o endereço estiver registado, receberás um e-mail com instruções.':'If the address is registered, you will receive an email with instructions.')}
+  else if(mode==='forgot'){const {error}=await supabase.auth.resetPasswordForEmail(email,{redirectTo:APP_URL});if(error)throw error;setMessage(pt?'Se o endereço estiver registado, receberás um e-mail com instruções.':'If the address is registered, you will receive an email with instructions.')}
   else if(mode==='update'){const {error}=await supabase.auth.updateUser({password});if(error)throw error;setMessage(pt?'Palavra-passe atualizada com sucesso.':'Password updated successfully.')}
  }catch(err){setError(err.message|| (pt?'Ocorreu um erro.':'Something went wrong.'))}finally{setBusy(false)}
  }
