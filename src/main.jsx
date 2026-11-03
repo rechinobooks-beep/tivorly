@@ -37,6 +37,7 @@ function showStartupError(error, source = 'Application startup') {
         React.createElement('h1', { style: { fontSize: '26px', margin: '8px 0 12px' } }, 'Não foi possível carregar a página'),
         React.createElement('p', { style: { color: '#cbd5e1', lineHeight: 1.6 } }, 'A aplicação encontrou um erro durante o arranque. Os detalhes abaixo ajudam a identificar o problema.'),
         React.createElement('p', { style: { color: '#fca5a5', overflowWrap: 'anywhere' } }, source + ': ' + message),
+        React.createElement('a', { href: 'mailto:tivorly.contact@gmail.com?subject=%5BTivorly%5D%20Erro%20no%20arranque', style: { display: 'inline-block', marginTop: '12px', marginRight: '10px', padding: '11px 18px', borderRadius: '10px', background: '#263449', color: 'white', textDecoration: 'none', fontWeight: 700 } }, 'Comunicar problema'),
         React.createElement('button', {
           onClick: () => window.location.reload(),
           style: {
@@ -54,14 +55,6 @@ function showStartupError(error, source = 'Application startup') {
     ),
   )
 }
-
-window.addEventListener('error', (event) => {
-  if (event.error) showStartupError(event.error, 'JavaScript')
-})
-
-window.addEventListener('unhandledrejection', (event) => {
-  showStartupError(event.reason, 'Operação assíncrona')
-})
 
 async function startApp() {
   try {
